@@ -47,7 +47,7 @@ def maximize_profit(shares_list, max_budget):
     # Create a dynamic programming table with (n+1) rows and (max_budget+1) columns
     dp = [[(0, 0)] * (int(max_budget) + 1) for _ in range(n + 1)]
 
-    # Iterate over the shares list and maximum budget
+    # Iterate over the share list and maximum budget
     for i in range(1, n + 1):
         for j in range(1, int(max_budget) + 1):
             # Extract action, cost, and profit from the current share

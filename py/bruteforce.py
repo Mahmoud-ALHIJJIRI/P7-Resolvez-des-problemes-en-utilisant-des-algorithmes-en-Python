@@ -77,7 +77,7 @@ def display_investment(investment, profit):
 
 
 def main():
-    file_path = 'data/test_shares.csv'
+    file_path = '../data/test_shares.csv'
     max_budget = 500
 
     # Start timing
