@@ -41,7 +41,7 @@ def maximize_profit(shares_list, max_budget):
         tuple: the Best investment options as a tuple (combination, profit).
     """
 
-    # Get the length of the shares list
+    # Get the length of the share list
     n = len(shares_list)
 
     # Create a dynamic programming table with (n+1) rows and (max_budget+1) columns
