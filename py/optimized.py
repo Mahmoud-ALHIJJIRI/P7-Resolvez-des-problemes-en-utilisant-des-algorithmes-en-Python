@@ -45,7 +45,7 @@ def maximize_profit(shares_list, max_budget):
     n = len(shares_list)
 
     # Create a dynamic programming table with (n+1) rows and (max_budget+1) columns
-    dp = [[(0, 0)] * (int(max_budget) + 1) for _ in range(n + 1)]
+    dp = [[0] * (int(max_budget) + 1) for _ in range(n + 1)]
 
     # Iterate over the share list and maximum budget
     for i in range(1, n + 1):
@@ -55,14 +55,14 @@ def maximize_profit(shares_list, max_budget):
             # Check if the current share cost is less than or equal to the current budget
             if cost <= j:
                 # Retrieve the previous profit from the valid index
-                prev_profit = dp[i - 1][int(j - cost)][1]
+                prev_profit = dp[i - 1][int(j - cost)]
                 # Calculate the new profit by adding the current share's profit
                 # with the profit obtained from the remaining budget after buying the current share
                 new_profit = prev_profit + (cost * profit) / 100
 
                 # Update the dynamic programming table if the new profit is greater
-                if new_profit > dp[i - 1][j][1]:
-                    dp[i][j] = (i, new_profit)
+                if new_profit > dp[i - 1][j]:
+                    dp[i][j] = new_profit
                 else:
                     dp[i][j] = dp[i - 1][j]
             else:
@@ -72,13 +72,13 @@ def maximize_profit(shares_list, max_budget):
     combination = []
     i, j = n, int(max_budget)
     while i > 0 and j > 0:
-        if dp[int(i)][int(j)][0] != dp[int(i - 1)][int(j)][0]:
+        if dp[int(i)][int(j)] != dp[int(i - 1)][int(j)]:
             combination.append(shares_list[i - 1])
             j -= shares_list[i - 1][1]
         i -= 1
 
     # Return the best combination of shares and the maximum profit
-    return tuple(combination), dp[n][int(max_budget)][1]
+    return tuple(combination), dp[n][int(max_budget)]
 
 
 def display_investment(investment, profit):
