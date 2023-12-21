@@ -38,7 +38,7 @@ def maximize_profit(shares_list, max_budget):
         max_budget (float): Maximum budget for the investment.
 
     Returns:
-        tuple: the Best investment options as a tuple (combination, profit).
+        tuple: the Best investment options as a tuple (combination, profit).8
     """
 
     # Get the length of the share list
@@ -54,21 +54,16 @@ def maximize_profit(shares_list, max_budget):
             action, cost, profit = shares_list[i - 1]
             # Check if the current share cost is less than or equal to the current budget
             if cost <= j:
-                # Compute the new profit only if (j - cost) is within the valid range
-                if 0 <= int(j - cost) < len(dp[i - 1]):
-                    # Retrieve the previous profit from the valid index
-                    prev_profit = dp[i - 1][int(j - cost)][1]
-                    # Calculate the new profit by adding the current share's profit
-                    # with the profit obtained from the remaining budget after buying the current share
-                    new_profit = prev_profit + (cost * profit) / 100
+                # Retrieve the previous profit from the valid index
+                prev_profit = dp[i - 1][int(j - cost)][1]
+                # Calculate the new profit by adding the current share's profit
+                # with the profit obtained from the remaining budget after buying the current share
+                new_profit = prev_profit + (cost * profit) / 100
 
-                    # Update the dynamic programming table if the new profit is greater
-                    if new_profit > dp[i - 1][j][1]:
-                        dp[i][j] = (i, new_profit)
-                    else:
-                        dp[i][j] = dp[i - 1][j]
+                # Update the dynamic programming table if the new profit is greater
+                if new_profit > dp[i - 1][j][1]:
+                    dp[i][j] = (i, new_profit)
                 else:
-                    # If (j - cost) is out of range, skip the computation and use the previous value
                     dp[i][j] = dp[i - 1][j]
             else:
                 dp[i][j] = dp[i - 1][j]
